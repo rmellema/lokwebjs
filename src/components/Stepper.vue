@@ -4,7 +4,8 @@
     <Tape :size="24" ref="Tape" :index="stepper.index"/>
     <ol>
       <li v-for="state in stepper.states" :key="state"
-          :class="{ active: state === stepper.state }">
+          :class="{ active: state === stepper.state,
+                    indent: stepper.descriptions[state].charAt() === '\t' }">
         {{ stepper.descriptions[state] }}
       </li>
     </ol>
@@ -62,6 +63,10 @@ ol {
 
 li.active {
   color: #FF0000;
+}
+
+li.indent {
+  padding-left: 15px;
 }
 
 h1 {

@@ -49,8 +49,53 @@ export default {
     }
   },
   methods: {
+    tweenComplete (pack) {
+      let idx = this.packets.indexOf(pack)
+      if (!pack.failed) {
+        this.$emit(pack.origin + '-arrived', pack)
+      }
+      if (idx > -1) {
+        this.packets.splice(idx, 1)
+      }
+    },
+    stop () {
+      TWEEN.removeAll()
+    },
+
+    restart () {
+      for (var packet of this.packets) {
+        var tween = new TWEEN.Tween(packet)
+        var toRemove = 0
+        if (packet.to.x.constructor === Array) {
+          for (var i = 0; i < packet.to.x.length - 1; i++) {
+            var x = packet.to.x[i]
+            var y = packet.to.y[i]
+            if (packet.origin === 'sender') {
+              if (x < packet.x) {
+                toRemove++
+                continue
+              }
+            } else {
+              if (x > packet.x) {
+                toRemove++
+                continue
+              }
+            }
+            if ((y < packet.y && packet.y < packet.to.y[i + 1]) ||
+              (y > packet.y && packet.y > packet.to.y[i + 1])) {
+              toRemove++
+            }
+          }
+          packet.to.x.splice(0, toRemove)
+          packet.to.y.splice(0, toRemove)
+        }
+        tween.to(packet.to, packet.time)
+        tween.onComplete(this.tweenComplete)
+        tween.start()
+      }
+    },
+
     addPacket (packet) {
-      var vm = this
       var fromSender = packet.origin === 'sender'
       function animate () {
         if (TWEEN.update()) {
@@ -84,16 +129,11 @@ export default {
         packet.failed = true
         time *= 0.50
       }
+      to.time = 0
+      packet.to = to
+      packet.time = time
       tween.to(to, time)
-      tween.onComplete(function (pack) {
-        let idx = vm.packets.indexOf(pack)
-        if (!pack.failed) {
-          vm.$emit(pack.origin + '-arrived', pack)
-        }
-        if (idx > -1) {
-          vm.packets.splice(idx, 1)
-        }
-      })
+      tween.onComplete(this.tweenComplete)
       tween.start()
       this.packets.push(packet)
       animate()

@@ -13,7 +13,7 @@
     </div>
     <div class="row">
       <button v-on:click="start" :disabled="timerId !== undefined">Start</button>
-      <button v-on:click="pauze" :disabled="timerId === undefined">Pause</button>
+      <button v-on:click="pauze" :disabled="timerId === undefined">Stop</button>
       <button v-on:click="step">Step</button>
     </div>
   </div>
@@ -33,16 +33,14 @@ export default {
   },
   methods: {
     start () {
-      if (this.timerId === undefined) {
-        this.step()
-        this.timerId = setInterval(this.step, 2000)
-      }
+      this.step()
+      this.timerId = setInterval(this.step, 2000)
+      this.$refs.CommLine.restart()
     },
     pauze () {
-      if (this.timerId !== undefined) {
-        clearInterval(this.timerId)
-        this.timerId = undefined
-      }
+      clearInterval(this.timerId)
+      this.timerId = undefined
+      this.$refs.CommLine.stop()
     },
     step () {
       this.$refs.Sender.step()

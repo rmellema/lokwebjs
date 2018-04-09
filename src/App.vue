@@ -1,22 +1,71 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <CommLine ref="CommLine"
+              v-on:sender-arrived="$refs.Receiver.accept($event)"
+              v-on:receiver-arrived="$refs.Sender.accept($event)"
+              :second-path="false"
+              />
+    <div class="row">
+      <Stepper class="sender" ref="Sender" name="Sender"
+              :stepper="protocol.sender"/>
+      <Stepper class="receiver" ref="Receiver" name="Receiver"
+              :stepper="protocol.receiver"/>
+    </div>
+    <div class="row">
+      <button v-on:click="start" :disabled="timerId !== undefined">Start</button>
+      <button v-on:click="pauze" :disabled="timerId === undefined">Pause</button>
+      <button v-on:click="step">Step</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import CommLine from './components/CommLine'
+import Stepper from './components/Stepper'
+
+import ProtocolA from './ProtocolA'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CommLine,
+    Stepper
+  },
+  methods: {
+    start () {
+      if (this.timerId === undefined) {
+        this.step()
+        this.timerId = setInterval(this.step, 2000)
+      }
+    },
+    pauze () {
+      if (this.timerId !== undefined) {
+        clearInterval(this.timerId)
+        this.timerId = undefined
+      }
+    },
+    step () {
+      this.$refs.Sender.step()
+      this.$refs.Receiver.step()
+    }
+  },
+  data () {
+    var vm = this
+    function emit (msg) {
+      vm.$refs.CommLine.addPacket(msg)
+    }
+    return {
+      timerId: undefined,
+      protocol: new ProtocolA('FDKEIKDOEKDKEEIZMXVEOOQQ', emit)
+    }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+$sender-color: #00bab3;
+$receiver-color: #faff2e;
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,5 +73,21 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: flex;
+}
+
+.sender {
+  background-color: $sender-color;
+  fill: $sender-color;
+}
+
+.receiver {
+  background-color: $receiver-color;
+  fill: $receiver-color;
 }
 </style>

@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import ProtocolA from './ProtocolA.js'
 
 Vue.config.productionTip = false
 
@@ -9,5 +10,12 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App/>'
+  data () {
+    return {
+      protA (tape, emit) {
+        return new ProtocolA(tape, emit)
+      }
+    }
+  },
+  template: '<App :protocolBuilder="protA"/>'
 })

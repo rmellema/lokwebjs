@@ -17,8 +17,8 @@ class Sender extends Stepper {
     super(startState, steps)
     this.tape = tape.split('')
     this.tape.reverse()
-    this.emit = function (msg) {
-      emitter({msg: msg, origin: 'sender'})
+    this.emit = function (msg, colour) {
+      emitter({msg: msg, colour: colour, origin: 'sender'})
     }
   }
 }
@@ -27,8 +27,8 @@ class Receiver extends Stepper {
   constructor (startState, steps, emitter) {
     super(startState, steps)
     this.tape = ''
-    this.emit = function (msg) {
-      emitter({msg: msg, origin: 'receiver'})
+    this.emit = function (msg, colour) {
+      emitter({msg: msg, colour: colour, origin: 'receiver'})
     }
   }
 }

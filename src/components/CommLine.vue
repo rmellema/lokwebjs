@@ -20,7 +20,7 @@
     </g>
     <TextBox v-for="(packet, idx) in packets"
              :x="packet.x + '%'" :y="packet.y + 'px'"
-             width="6%" :height="box_height/2" :text="packet.msg"
+             width="6%" :height="box_height/2" :text="packetText(packet)"
              :class="packet.origin"
              :key="packet.msg + idx" />
   </svg>
@@ -92,6 +92,14 @@ export default {
         tween.to(packet.to, packet.time)
         tween.onComplete(this.tweenComplete)
         tween.start()
+      }
+    },
+
+    packetText (packet) {
+      if (packet.colour) {
+        return packet.msg + ', ' + packet.colour
+      } else {
+        return packet.msg
       }
     },
 

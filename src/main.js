@@ -1,21 +1,31 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
-import ProtocolA from './ProtocolA.js'
+import routes from './routes'
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
+const app = new Vue({
   el: '#app',
-  components: { App },
-  data () {
-    return {
-      protA (tape, emit) {
-        return new ProtocolA(tape, emit)
-      }
+  data: {
+    currentRoute: window.location.pathname
+  },
+  computed: {
+    ViewComponent () {
+      const matchingView = routes[this.currentRoute]
+      console.log('Mounting ' + matchingView)
+      return matchingView
+        ? require('./pages/' + matchingView + '.vue').default
+        : require('./pages/Index.vue').default
     }
   },
-  template: '<App :protocolBuilder="protA"/>'
+  render (h) {
+    console.log('Calling render')
+    console.log(this.ViewComponent)
+    return h(this.ViewComponent)
+  }
+})
+
+window.addEventListener('popstate', () => {
+  app.currentRoute = window.location.pathname
 })

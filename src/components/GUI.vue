@@ -1,10 +1,5 @@
 <template>
-  <div id="app">
-    <div class="nav">
-      <a href="/protA.html" class="button">Protocol A</a>
-      <a href="/protB.html" class="button">Protocol B</a>
-      <a href="/protTCP.html" class="button">Protocol TCP</a>
-    </div>
+  <MainLayout>
     <h1>{{ protocol.name }}</h1>
     <CommLine ref="CommLine"
               v-on:sender-arrived="$refs.Receiver.accept($event)"
@@ -21,17 +16,21 @@
       <button class="button" v-on:click="start" :disabled="timerId !== undefined">Start</button>
       <button class="button" v-on:click="pauze" :disabled="timerId === undefined">Stop</button>
     </div>
-  </div>
+  </MainLayout>
 </template>
 
 <script>
-import CommLine from './components/CommLine'
-import Stepper from './components/Stepper'
+import CommLine from './CommLine'
+import MainLayout from './MainLayout'
+import NavBar from './NavBar'
+import Stepper from './Stepper'
 
 export default {
-  name: 'App',
+  name: 'GUI',
   components: {
     CommLine,
+    MainLayout,
+    NavBar,
     Stepper
   },
   methods: {
@@ -55,7 +54,7 @@ export default {
   },
   props: {
     secondPath: {
-      required: true,
+      type: Boolean,
       default: false
     },
     protocolBuilder: {
@@ -75,33 +74,6 @@ export default {
 </script>
 
 <style lang="scss">
-$sender-color: #00bab3;
-$receiver-color: #faff2e;
-$button-color: #00BAB3;
-
-body {
-  margin: 0px;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-h1 {
-  margin: 0px;
-}
-
-.nav {
-  display: flex;
-  justify-content: space-evenly;
-  background-color: $button-color;
-  padding: 5px;
-}
-
 .button {
   color: inherit;
   border: none;
@@ -111,31 +83,11 @@ h1 {
   font-weight: bold;
 }
 
-button.button {
-  font-size: 20px;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.15) $button-color;
-}
-
-a:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
 .row {
   display: flex;
   justify-content: center;
   align-items: flex;
   margin-left: 5px;
   margin-right: 5px;
-}
-
-.sender {
-  background-color: $sender-color;
-  fill: $sender-color;
-}
-
-.receiver {
-  background-color: $receiver-color;
-  fill: $receiver-color;
 }
 </style>

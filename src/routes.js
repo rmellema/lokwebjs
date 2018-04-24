@@ -1,4 +1,5 @@
 export default {
   '/': 'Index',
-  '/protA': 'ProtA'
+  '/protA': 'ProtA',
+  '/protB': 'ProtB'
 }

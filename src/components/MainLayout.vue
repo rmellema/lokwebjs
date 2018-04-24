@@ -44,7 +44,15 @@ h1 {
 button.button {
   font-size: 20px;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.15) $button-color;
+  background-color: $button-color;
+}
+
+button:hover {
+  background-color: darken($button-color, 10%);
+}
+
+button:disabled {
+  background-color: fade-out($button-color, 0.7)
 }
 
 .sender {

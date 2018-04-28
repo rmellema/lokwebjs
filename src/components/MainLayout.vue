@@ -41,6 +41,15 @@ h1 {
   background-color: $button-color;
 }
 
+.button {
+  color: inherit;
+  border: none;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  font-weight: bold;
+}
+
 button.button {
   font-size: 20px;
   padding: 20px;

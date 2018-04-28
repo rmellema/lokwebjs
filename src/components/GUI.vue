@@ -74,15 +74,6 @@ export default {
 </script>
 
 <style lang="scss">
-.button {
-  color: inherit;
-  border: none;
-  padding: 5px;
-  background-color: rgba(0, 0, 0, 0.15);
-  text-decoration: none;
-  font-weight: bold;
-}
-
 .row {
   display: flex;
   justify-content: center;

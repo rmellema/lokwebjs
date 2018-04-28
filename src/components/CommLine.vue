@@ -61,6 +61,10 @@ export default {
     stop () {
       TWEEN.removeAll()
     },
+    clear () {
+      this.stop()
+      this.packets = []
+    },
 
     restart () {
       for (var packet of this.packets) {

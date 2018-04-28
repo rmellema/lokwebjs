@@ -15,11 +15,18 @@ class Protocol {
 class Sender extends Stepper {
   constructor (startState, steps, tape, emitter) {
     super(startState, steps)
+    this.startTape = tape
     this.tape = tape.split('')
     this.tape.reverse()
     this.emit = function (msg, colour) {
       emitter({msg: msg, colour: colour, origin: 'sender'})
     }
+  }
+
+  reset () {
+    super.reset()
+    this.tape = this.startTape.split('')
+    this.tape.reverse()
   }
 }
 

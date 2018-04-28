@@ -13,6 +13,8 @@
               :stepper="protocol.receiver"/>
     </div>
     <div class="row">
+      <button class="button" v-on:click="reset" :disabled="timerId !==
+        undefined">Reset</button>
       <button class="button" v-on:click="start" :disabled="timerId !== undefined">Start</button>
       <button class="button" v-on:click="pauze" :disabled="timerId === undefined">Stop</button>
     </div>
@@ -47,6 +49,12 @@ export default {
     step () {
       this.$refs.Sender.step()
       this.$refs.Receiver.step()
+    },
+    reset () {
+      this.pauze()
+      this.$refs.CommLine.clear()
+      this.$refs.Sender.reset()
+      this.$refs.Receiver.reset()
     },
     emit (msg) {
       this.$refs.CommLine.addPacket(msg)

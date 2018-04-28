@@ -47,6 +47,9 @@ export default {
     }
   },
   methods: {
+    reset () {
+      this.letters = []
+    },
     addLetter (letter) {
       if (this.size <= this.letters.length) {
         throw new TapeError(letter)

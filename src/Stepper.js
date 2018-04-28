@@ -26,6 +26,7 @@ class Stepper {
    * :param: startState The initial state of the Stepper
    */
   constructor (startState, steps) {
+    this.startState = startState
     this.state = startState
     this.states = steps
     this._stateSet = {}
@@ -41,6 +42,11 @@ class Stepper {
     if (!this.isStep(startState)) {
       throw new StateNotFoundError(startState, this)
     }
+  }
+
+  reset () {
+    this.state = this.startState
+    this.tape = ''
   }
 
   setupDescriptions () {

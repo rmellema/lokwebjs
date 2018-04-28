@@ -23,6 +23,12 @@ class SenderA extends Sender {
     this.index = 0
   }
 
+  reset () {
+    super.reset()
+    this.letter = undefined
+    this.index = 0
+  }
+
   stateBegin () {
     return 'Read'
   }
@@ -69,6 +75,12 @@ class ReceiverA extends Receiver {
     this.helpUpI = '\ti := i + 1'
     this.helpEnd = 'done'
     this.setupDescriptions()
+    this.index = 0
+    this.letter = ''
+  }
+
+  reset () {
+    super.reset()
     this.index = 0
     this.letter = ''
   }

@@ -38,6 +38,10 @@ export default {
     accept (packet) {
       this.stepper.onMessage(packet)
     },
+    reset () {
+      this.$refs.Tape.reset()
+      this.stepper.reset()
+    },
     step () {
       this.stepper.step()
     }

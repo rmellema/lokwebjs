@@ -1,5 +1,8 @@
 <template>
   <MainLayout>
+    <template slot="navigation">
+      <slot/>
+    </template>
     <h1>{{ protocol.name }}</h1>
     <CommLine ref="CommLine"
               v-on:sender-arrived="$refs.Receiver.accept($event)"

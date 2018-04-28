@@ -1,9 +1,15 @@
 <template>
-<div class="nav">
-  <v-link href="/protA">Protocol A</v-link>
-  <v-link href="/protB">Protocol B</v-link>
-  <v-link href="/protTCP">Protocol TCP</v-link>
-</div>
+  <div>
+  <div class="nav">
+    <v-link href="/protA">Protocol A</v-link>
+    <v-link href="/protB">Protocol B</v-link>
+    <v-link href="/protTCP">Protocol TCP</v-link>
+  </div>
+  <div class="nav">
+    <slot>
+    </slot>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -22,5 +28,9 @@ export default {
   display: flex;
   justify-content: space-evenly;
   padding: 5px;
+}
+
+.nav:empty {
+  padding: 0px;
 }
 </style>

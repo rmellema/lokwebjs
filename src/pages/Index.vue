@@ -7,7 +7,6 @@
 <script>
 import MainLayout from '../components/MainLayout'
 import NavBar from '../components/NavBar'
-console.log('Loading Main')
 
 export default {
   components: {

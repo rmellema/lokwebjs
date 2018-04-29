@@ -1,11 +1,12 @@
 <template>
   <div id="stepper">
     <h1>{{ name }}</h1>
-    <Tape :size="24" ref="Tape" :index="stepper.index"/>
+    <Tape :size="24" ref="Tape" :index="stepper.index"
+                     :offset="stepper.offset"/>
     <ol>
       <li v-for="state in stepper.states" :key="state"
-          :class="{ active: state === stepper.state,
-                    indent: stepper.descriptions[state].charAt() === '\t' }">
+          :style="{ paddingLeft: 15 * indent(stepper.descriptions[state]) + 'px' }"
+          :class="{ active: state === stepper.state }">
         {{ stepper.descriptions[state] }}
       </li>
     </ol>
@@ -35,6 +36,14 @@ export default {
     }
   },
   methods: {
+    indent (str) {
+      var i = 0
+      for (; i < str.length; i++) {
+        if (str.charAt(i) !== '\t') {
+          return i
+        }
+      }
+    },
     accept (packet) {
       this.stepper.onMessage(packet)
     },

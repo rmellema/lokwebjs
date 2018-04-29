@@ -7,4 +7,5 @@ export default {
   '/protBsp': 'ProtBsp',
   '/protBn4': 'ProtBn4',
   '/protBnc': 'ProtBnc',
+  '/protTCP': 'ProtTCP'
 }

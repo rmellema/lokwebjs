@@ -12,7 +12,8 @@
       </tr>
       <tr>
         <td>Index</td>
-        <td v-for="n in size" :key="n" :class="{ active: index === n - 1 }">
+        <td v-for="n in length" :key="n"
+          :class="{ active: index === n - 1, offset: offset === n - 1 }">
           {{ n - 1 }}
         </td>
       </tr>
@@ -27,6 +28,10 @@ export default {
     index: {
       type: Number,
       default: 0
+    },
+    offset: {
+      type: Number,
+      default: -1
     },
     size: {
       required: true,
@@ -64,6 +69,10 @@ export default {
 table {
   table-layout: fixed;
   width: 100%;
+}
+
+td.offset {
+  color: #0000FF;
 }
 
 td.active {

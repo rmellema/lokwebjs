@@ -6,7 +6,7 @@
         <td v-for="(letter, idx) in letters" :key="letter + idx">
           {{ letter }}
         </td>
-        <td v-for="n in (size - letters.length)" :key="n">
+        <td v-for="n in (length - letters.length)" :key="n">
           .
         </td>
       </tr>
@@ -21,14 +21,6 @@
 </template>
 
 <script>
-function TapeError (letter) {
-  this.name = 'TapeError'
-  this.message = "Adding a letter that does not fit on the tape: '"
-  this.message += letter + "'"
-  this.stack = (new Error()).stack
-}
-TapeError.prototype = new Error()
-
 export default {
   name: 'Tape',
   props: {
@@ -46,14 +38,16 @@ export default {
       letters: []
     }
   },
+  computed: {
+    length () {
+      return Math.max(this.size, this.letters.length)
+    }
+  },
   methods: {
     reset () {
       this.letters = []
     },
     addLetter (letter) {
-      if (this.size <= this.letters.length) {
-        throw new TapeError(letter)
-      }
       this.letters.push(letter)
     }
   }
@@ -64,6 +58,7 @@ export default {
 #tape {
   width: 100%;
   background-color: rgba(0,0,0, 0.1);
+  overflow: auto;
 }
 
 table {

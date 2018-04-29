@@ -90,6 +90,7 @@ class ReceiverB extends Receiver {
 
   stateUpI () {
     this.index += 1
+    this.colour = getColour(this.index)
     return 'Write'
   }
 
@@ -97,7 +98,7 @@ class ReceiverB extends Receiver {
   }
 
   handleMessage (msg) {
-    if (this.state === 'Skip') {
+    if (this.state === 'Skip' && this.colour === msg.colour) {
       this.letter = msg.msg
       return 'Write'
     } else if (this.state === 'Send' && this.colour !== msg.colour) {

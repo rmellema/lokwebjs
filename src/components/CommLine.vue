@@ -131,7 +131,7 @@ export default {
         } else {
           to = {x: [67, 67, 27, 27, 17], y: [85, 45, 45, 85, 85]}
         }
-        time *= 1.8
+        time *= 5
       } else if (rand >= 1) {
         if (fromSender) {
           to = {x: [27, 27, 42], y: [85, 125, 125]}

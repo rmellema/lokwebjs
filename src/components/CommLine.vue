@@ -100,7 +100,7 @@ export default {
     },
 
     packetText (packet) {
-      if (packet.colour) {
+      if (packet.colour || packet.colour === 0) {
         return packet.msg + ', ' + packet.colour
       } else {
         return packet.msg

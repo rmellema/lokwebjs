@@ -39,7 +39,7 @@ h1 {
   margin: 0px;
 }
 
-.nav {
+nav {
   background-color: $button-color;
 }
 

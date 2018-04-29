@@ -37,6 +37,12 @@ export default {
   color: black;
 }
 
+a {
+  margin: auto;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
 a:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }

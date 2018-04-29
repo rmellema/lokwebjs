@@ -1,15 +1,15 @@
 <template>
-  <div>
-  <div class="nav">
+  <nav>
+  <div class="row">
     <v-link href="/protA">Protocol A</v-link>
     <v-link href="/protB">Protocol B</v-link>
     <v-link href="/protTCP">Protocol TCP</v-link>
   </div>
-  <div class="nav">
+  <div class="row">
     <slot>
     </slot>
   </div>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -23,14 +23,19 @@ export default {
 }
 </script>
 
-<style>
-.nav {
+<style scoped>
+.row {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: center;
   padding: 5px;
 }
 
-.nav:empty {
+.button {
+  margin: 5px;
+}
+
+div:empty {
   padding: 0px;
 }
 </style>

@@ -13,15 +13,12 @@ const app = new Vue({
   computed: {
     ViewComponent () {
       const matchingView = routes[this.currentRoute]
-      console.log('Mounting ' + matchingView)
       return matchingView
         ? require('./pages/' + matchingView + '.vue').default
         : require('./pages/Index.vue').default
     }
   },
   render (h) {
-    console.log('Calling render')
-    console.log(this.ViewComponent)
     return h(this.ViewComponent)
   }
 })

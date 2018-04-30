@@ -27,6 +27,13 @@ class SenderB extends Sender {
     this.colour = getColour(this.index)
   }
 
+  reset () {
+    super.reset()
+    this.letter = undefined
+    this.index = 0
+    this.colour = getColour(this.index)
+  }
+
   stateBegin () {
     return 'Read'
   }
@@ -70,6 +77,13 @@ class ReceiverB extends Receiver {
     this.index = 0
     this.colour = getColour(this.index)
     this.letter = ''
+  }
+
+  reset () {
+    super.reset()
+    this.letter = ''
+    this.index = 0
+    this.colour = getColour(this.index)
   }
 
   stateBegin () {

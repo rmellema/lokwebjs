@@ -38,6 +38,15 @@ class SenderTCP extends Sender {
     this.max = -1
   }
 
+  reset () {
+    super.reset()
+    this.offset = 0
+    this.index = 0
+    this.window = []
+    this.popped = 0
+    this.max = -1
+  }
+
   stateSetup () {
     return 'Setup2'
   }
@@ -145,6 +154,13 @@ class ReceiverTCP extends Receiver {
     this.helpUpI = '\ti := i + 1'
     this.helpEnd = 'done'
     this.setupDescriptions()
+    this.index = 0
+    this.letter = ''
+    this.messages = {}
+  }
+
+  reset () {
+    super.reset()
     this.index = 0
     this.letter = ''
     this.messages = {}

@@ -1,7 +1,7 @@
 <template>
   <div>
     <GUI :protocolBuilder="protABuilder">
-      <v-link href="/protA">Default</v-link>
+      <v-link href="/protAd">Default</v-link>
       <v-link href="/protAnc">Without step 3 and 4 on S</v-link>
       <v-link href="/protAnrc">Without 4 on S</v-link>
     </GUI>

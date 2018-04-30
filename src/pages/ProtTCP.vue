@@ -1,6 +1,6 @@
 <template>
   <div>
-    <GUI :protocolBuilder="protABuilder" :secondPath="true"/>
+    <GUI :protocolBuilder="protTCPBuilder" :secondPath="true"/>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   components: {GUI},
   data () {
     return {
-      protABuilder (tape, emit) {
+      protTCPBuilder (tape, emit) {
         return new ProtocolTCP(tape, emit)
       }
     }

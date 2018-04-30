@@ -1,7 +1,7 @@
 <template>
   <div>
     <GUI :protocolBuilder="protBBuilder">
-      <v-link href="/protB">Default</v-link>
+      <v-link href="/protBd">Default</v-link>
       <v-link href="/protBsp">With Second Path</v-link>
       <v-link href="/protBn4">Without Step 4</v-link>
       <v-link href="/protBnc">Without Colours</v-link>

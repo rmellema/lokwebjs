@@ -1,5 +1,5 @@
 <template>
-  <a v-bind:href="href" class="button" v-bind:class="{ active: isActive }" v-on:click="go" >
+  <a v-bind:href="'.' + href" class="button" v-bind:class="{ active: isActive }" v-on:click="go" >
     <slot></slot>
   </a>
 </template>
@@ -15,17 +15,17 @@ export default {
   },
   computed: {
     isActive () {
-      return this.href === this.$root.currentRoute
+      return this.$root.appRoute.startsWith(this.href)
     }
   },
   methods: {
     go (event) {
       event.preventDefault()
-      this.$root.currentRoute = this.href
+      this.$root.currentRoute = this.$root.prefix + this.href
       window.history.pushState(
         null,
-        routes[this.href],
-        this.href
+        routes[this.$root.prefix + this.href],
+        this.$root.prefix + this.href
       )
     }
   }
